@@ -1,4 +1,4 @@
-}
+
 const w = 500;
 const h = 500;
 const padX = 30;
@@ -123,7 +123,6 @@ function yearFilter(films, date_min, date_max) {
     let myear = films[i].year;
     if ((myear<date_max) && (myear>date_min)) {
       set.push(films[i]);
-      console.log(films[i]);
     }
   }
   console.log("-> Total: " + set.length + " films");
@@ -137,7 +136,6 @@ function popularityFilter(films, pop_min, pop_max) {
     let mpop = films[i].popularity;
     if ((mpop<date_max) && (mpop>date_min)) {
       set.push(films[i]);
-      console.log(films[i]);
 
     }
   }
@@ -193,7 +191,7 @@ function getFilmsPerSubject(films, person){
 function getSixSubjects(films, person){
   var dict = getFilmsPerSubject(films, person);
   var filmsPerSubject = sort_object(dict);
-  console.log(filmsPerSubject.slice(0,6));
+  console.log("Person film per subject : " + filmsPerSubject.slice(0,6));
   return filmsPerSubject.slice(0,6);
 
 }
