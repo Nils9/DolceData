@@ -1,8 +1,11 @@
+var actorName = ["Antonio Banderas"];
 var dataset = [["Western", 3], ["Adventure", 10], ["Crime", 2]];
 var dataset2 = [["Fantasy", 5], ["Horror", 4], ["Music", 12]];
 var nbAwards = 4;
-var favoriteDirector = "Pedro Almodovar"
-var favoriteActress = "Pénélope Cruz"
+var type1 = "Réalisateur fétiche"
+var favorite1 = "Pedro Almodovar"
+var type2 = "Actrice fétiche"
+var favorite2 = "Pénélope Cruz"
 
 var nb = []
 for (i = 0; i < dataset.length; i++) {
@@ -39,18 +42,31 @@ var svg2 = d3.select("#bas")
 var svg3 = d3.select("#actor")
             .append("svg")
             .attr("width", w-step)
-            .attr("height", 20+margin.top+margin.bottom)
-            .append("rect")
+            .attr("height", 20+margin.top+margin.bottom);
+            /*.append("rect")
             .attr("width", w-step)
             .attr("height", 20+margin.top+margin.bottom)
-            .style("fill", "black")
-            .attr('transform', `translate(${margin.left}, ${margin.top})`);
+            .style("fill", "red")
+            .attr('transform', `translate(${margin.left}, ${margin.top})`);*/
 
-var name = svg3.append("text")
-.text("Antonio Banderas")
+svg3.append("rect")
+.attr("width", w-step)
+.attr("height", 20+margin.top+margin.bottom)
+.style("fill", "black")
+.attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+svg3.selectAll("text")
+.data(actorName)
+.enter()
+.append("text")
+.text(function(d) {console.log(d); return d;})
+//.text("Antonio Banderas")
+.attr("x", (w-step)/2)
+.attr("y", (20+margin.top+margin.bottom)/2+10)
 .attr("font-family", "sans-serif")
-.attr("font-size", "20px")
-.attr("fill", "white");
+.attr("font-size", "11px")
+.attr("fill", "white")
+.attr("text-anchor", "middle");
 
 for (i = 0; i < nbAwards; i++) {
   var cups = d3.select("#coupe")
@@ -63,21 +79,57 @@ for (i = 0; i < nbAwards; i++) {
   .attr("type", "image/svg+xml");
 }
 
-var favoriteText1 = d3.select("#fetiche1")
-.append("text")
-.attr("y", 400)
-.text("Réalisateur fétiche: "+ favoriteDirector)
-.attr("font-family", "sans-serif")
-.attr("font-size", "20px")
-.attr("fill", "red");
+var svgFetiche = d3.select("#fetiche1")
+            .append("svg")
 
-var favoriteText2 = d3.select("#fetiche2")
-.append("text")
-.attr("y", 400)
-.text("Actrice fétiche: "+ favoriteActress)
+svgFetiche.append("text")
+.attr("y", 20)
+.attr("x", 0.4*w)
+.text(type1)
 .attr("font-family", "sans-serif")
-.attr("font-size", "20px")
-.attr("fill", "red");
+.attr("font-size", "11px")
+.attr("text-anchor", "middle");
+
+svgFetiche.append("rect")
+.attr("y", 15)
+.attr("width", 0.8*w)
+.attr("height", h/5)
+.style("fill", "black")
+.attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+svgFetiche.append("text")
+.attr("y", 20+0.19*h)
+.attr("x", 0.4*w)
+.text(favorite1)
+.attr("font-family", "sans-serif")
+.attr("font-size", "11px")
+.attr("fill","white")
+.attr("text-anchor", "middle");
+
+svgFetiche.append("text")
+.attr("y", 20)
+.attr("x", 1.3*w)
+.text(type2)
+.attr("font-family", "sans-serif")
+.attr("font-size", "11px")
+.attr("text-anchor", "middle");
+
+svgFetiche.append("rect")
+.attr("y", 15)
+.attr("x", 0.9*w)
+.attr("width", 0.8*w)
+.attr("height", h/5)
+.style("fill", "black")
+.attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+svgFetiche.append("text")
+.attr("y", 20+0.19*h)
+.attr("x", 1.3*w)
+.text(favorite2)
+.attr("font-family", "sans-serif")
+.attr("font-size", "11px")
+.attr("fill","white")
+.attr("text-anchor", "middle");
 
 
 svg1.selectAll("rect")
