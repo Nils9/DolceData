@@ -109,7 +109,7 @@ d3.csv("data/film.csv")
   x = d3.scaleLinear().domain(d3.extent(rows, (row) => row.long)).range([0, w]);
   y = d3.scaleLinear().domain(d3.extent(rows, (row) => row.lat)).range([h, 0]);
   dataset = rows;
-  let ff = yearFilter(dataset, 1975,1980 );
+  let ff = yearFilter(dataset, 1975, 1978);
   let popu = getPopularity(ff, "Redford - Robert");
   let award = getNbOfAwards(ff, "Redford - Robert");
   //draw();
@@ -122,7 +122,22 @@ function yearFilter(films, date_min, date_max) {
     let myear = films[i].year;
     if ((myear<date_max) && (myear>date_min)) {
       set.push(films[i]);
+      console.log(films[i]); 
+    }
+  }
+  console.log("-> Total: " + set.length + " films");
+  return set;
+}
+
+function popularityFilter(films, pop_min, pop_max) {
+  let set = [];
+  console.log("Popularity filter " +pop_min + " to "+ pop_max );
+  for(var i = 0; i<films.length; i++) {
+    let mpop = films[i].popularity;
+    if ((mpop<date_max) && (mpop>date_min)) {
+      set.push(films[i]);
       console.log(films[i]);
+       
     }
   }
   console.log("-> Total: " + set.length + " films");
@@ -136,7 +151,6 @@ function getPopularity(films, actor) {
   for(var i = 0; i<films.length; i++) {
     if (films[i].actor == actor) {
       popu = popu + films[i].popularity;
-      console.log("- "+ i+" : " + popu);
     }
   }
   console.log("Popularity of "+ actor +" : " + popu);
@@ -146,9 +160,8 @@ function getPopularity(films, actor) {
 function getNbOfAwards(films, actor) {
   var n = 0;
   for(var i = 0; i<films.length; i++) {
-    if ((films[i].actor == actor) && (films.award == "Yes")){
+    if ((films[i].actor == actor) && (films[i].award == "Yes")){
       n = n + 1;
-      console.log("- "+ i+" : " + n);
     }
   }
   console.log("Number of Awards "+ actor +" : " + n);
