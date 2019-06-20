@@ -1,6 +1,6 @@
 var dataset = [["Western", 3], ["Adventure", 10], ["Crime", 2]];
 var dataset2 = [["Fantasy", 5], ["Horror", 4], ["Music", 12]];
-var nbAwards = 2;
+var nbAwards = 4;
 
 var nb = []
 for (i = 0; i < dataset.length; i++) {
@@ -10,11 +10,9 @@ var nb2 = []
 for (i = 0; i < dataset2.length; i++) {
   nb2.push(dataset2[i][1]);
 }
-console.log(nb)
 
 const sum = nb.reduce(function(a, b) {return a + b;});
 const sum2 = nb2.reduce(function(a, b) {return a + b;});
-console.log(sum)
 
 
 // Largeur et hauteur
@@ -45,6 +43,17 @@ var svg3 = d3.select("#actor")
             .attr("height", 20+margin.top+margin.bottom)
             .style("fill", "black")
             .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+for (i = 0; i < nbAwards; i++) {
+  var cups = d3.select("body")
+  .append("object")
+  .attr("data", "coupe.svg")
+  .attr("y", 400)
+  .attr("width", 50)
+  .attr("height", 50+margin.top+margin.bottom)
+  .attr('transform', `translate(${margin.top})`)
+  .attr("type", "image/svg+xml");
+}
 
 
 svg1.selectAll("rect")
