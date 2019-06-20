@@ -1,3 +1,5 @@
+
+
 const w = 500;
 const h = 500;
 const padX = 30;
@@ -81,16 +83,18 @@ function draw()
   });
 }
 
-d3.tsv("data/france.tsv")
-.row((d, i) => {
+d3.csv("data/film.csv")
+.row(function (d) {
   return {
-    codeP: +d["Postal Code"],
-    insee: +d.inseecode,
-    place: d.place,
-    long: +d.x,
-    lat: +d.y,
-    pop: +d.population,
-    dens: +d.density
+    year: +d["Year"],
+    length: +d.Length,
+    title: d.Title,
+    subject: d.Subject,
+    actor: d.Actor,
+    director: d.Director,
+    actress: d.Actress,
+    popularity: +d.Popularity,
+    award: d.Awards,
   };
 })
 .get((error, rows) => {
@@ -98,11 +102,55 @@ d3.tsv("data/france.tsv")
   console.log("Loaded : " + rows.length);
   if(rows.length > 0)
     {
-      console.log("First row : ", rows[0]);
-      console.log("Last row : ", rows[rows.length - 1]);
+      ;
+      console.log("First row : ", rows[42]);
+      console.log("Last row : ", rows[1111]);
     }
   x = d3.scaleLinear().domain(d3.extent(rows, (row) => row.long)).range([0, w]);
   y = d3.scaleLinear().domain(d3.extent(rows, (row) => row.lat)).range([h, 0]);
   dataset = rows;
-  draw();
+  let ff = yearFilter(dataset, 1975,1980 );
+  let popu = getPopularity(ff, "Redford - Robert");
+  let award = getNbOfAwards(ff, "Redford - Robert");
+  //draw();
 });
+
+function yearFilter(films, date_min, date_max) {
+  let set = [];
+  console.log("Year filter " +date_min + " to "+ date_max );
+  for(var i = 0; i<films.length; i++) {
+    let myear = films[i].year;
+    if ((myear<date_max) && (myear>date_min)) {
+      set.push(films[i]);
+      console.log(films[i]);
+    }
+  }
+  console.log("-> Total: " + set.length + " films");
+  return set;
+}
+
+
+function getPopularity(films, actor) {
+
+  var popu = 0;
+  for(var i = 0; i<films.length; i++) {
+    if (films[i].actor == actor) {
+      popu = popu + films[i].popularity;
+      console.log("- "+ i+" : " + popu);
+    }
+  }
+  console.log("Popularity of "+ actor +" : " + popu);
+  return popu;
+}
+
+function getNbOfAwards(films, actor) {
+  var n = 0;
+  for(var i = 0; i<films.length; i++) {
+    if ((films[i].actor == actor) && (films.award == "Yes")){
+      n = n + 1;
+      console.log("- "+ i+" : " + n);
+    }
+  }
+  console.log("Number of Awards "+ actor +" : " + n);
+  return n;
+}
