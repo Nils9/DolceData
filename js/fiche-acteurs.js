@@ -1,6 +1,8 @@
 var dataset = [["Western", 3], ["Adventure", 10], ["Crime", 2]];
 var dataset2 = [["Fantasy", 5], ["Horror", 4], ["Music", 12]];
 var nbAwards = 4;
+var favoriteDirector = "Pedro Almodovar"
+var favoriteActress = "Pénélope Cruz"
 
 var nb = []
 for (i = 0; i < dataset.length; i++) {
@@ -44,8 +46,14 @@ var svg3 = d3.select("#actor")
             .style("fill", "black")
             .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
+var name = svg3.append("text")
+.text("Antonio Banderas")
+.attr("font-family", "sans-serif")
+.attr("font-size", "20px")
+.attr("fill", "white");
+
 for (i = 0; i < nbAwards; i++) {
-  var cups = d3.select("body")
+  var cups = d3.select("#coupe")
   .append("object")
   .attr("data", "coupe.svg")
   .attr("y", 400)
@@ -54,6 +62,22 @@ for (i = 0; i < nbAwards; i++) {
   .attr('transform', `translate(${margin.top})`)
   .attr("type", "image/svg+xml");
 }
+
+var favoriteText1 = d3.select("#fetiche1")
+.append("text")
+.attr("y", 400)
+.text("Réalisateur fétiche: "+ favoriteDirector)
+.attr("font-family", "sans-serif")
+.attr("font-size", "20px")
+.attr("fill", "red");
+
+var favoriteText2 = d3.select("#fetiche2")
+.append("text")
+.attr("y", 400)
+.text("Actrice fétiche: "+ favoriteActress)
+.attr("font-family", "sans-serif")
+.attr("font-size", "20px")
+.attr("fill", "red");
 
 
 svg1.selectAll("rect")
