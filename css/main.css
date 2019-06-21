@@ -5,7 +5,7 @@ svg {
 body {
   display: flex;
 
-  flex-flow: row no-wrap;
+  flex-flow: row wrap;
 }
 
 #canvas {
@@ -18,4 +18,10 @@ body {
   justify-content: flex-start;
 
   align-items: flex-start;
+}
+
+#fiche {
+  justify-content: flex-start;
+
+  align-items: flex-end;
 }

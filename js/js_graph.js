@@ -1,9 +1,8 @@
-
-
 //create somewhere to put the force directed graph
 var svg_graph = d3.select("#graph"),
- width = +svg_graph.attr("width"),
- height = +svg_graph.attr("height");
+ width = +svg_graph.node().getBoundingClientRect().width,
+ height = +svg_graph.node().getBoundingClientRect().height;
+ console.log("graph " + width + " " + height);
 
 //d3 code goes here
 
@@ -58,105 +57,6 @@ var links_data = [
     {"source": "Mauer", "target": "Jessie", "type":"E"}
 ]
 
-
-function drag_start(d) {
-  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-  d.fx = d.x;
-  d.fy = d.y;
-}
-
-function drag_drag(d) {
-  d.fx = d3.event.x;
-  d.fy = d3.event.y;
-}
-
-function drag_end(d) {
-  if (!d3.event.active) simulation.alphaTarget(0);
-  d.fx = d.x;
-  d.fy = d.y;
-}
-
-function handleClick(d, i) {  // Add interactivity
-  if(lastCircle != null)
-  {
-      d3.select(lastCircle).attr("fill", "blue");
-  }
-
-  if(this == lastCircle)
-  {
-    d3.select(lastCircle).attr("fill", "blue");
-    lastCircle = null;
-  }
-  else
-  {
-    // Use D3 to select element, change color and size
-    d3.select(this).attr("fill", "orange");
-    lastCircle = this;
-  }
-}
-
-// The complete tickActions function
-function tickActions() {
-  //update circle positions each tick of the simulation
-  node
-      .attr("x", function(d) { return d.x-radius/2; })
-      .attr("y", function(d) { return d.y-radius/2; });
-
-  //update link positions
-  //simply tells one end of the line to follow one node around
-  //and the other end of the line to follow the other node around
-  link
-      .attr("x1", function(d) { return d.source.x; })
-      .attr("y1", function(d) { return d.source.y; })
-      .attr("x2", function(d) { return d.target.x; })
-      .attr("y2", function(d) { return d.target.y; });
-}
-
-//Function to choose the line colour and thickness
-//If the link type is "A" return green
-//If the link type is "E" return red
-function linkColour(d){
-  if(d.type == "A"){
-      return "green";
-  } else {
-      return "green";
-  }
-}
-
-
-
-// Create Event Handlers for mouse
-function handleMouseOver(d, i) {  // Add interactivity
-  // Specify where to put label of text
-  svg_graph.append("text").attr("id", "t" + i).attr("x", function() { return d.x - 30; }).attr("y", function() { return d.y - 15; })
-  .text(d.name);
-}
-
-function handleMouseOut(d, i) {
-  // Select text by id and then remove
-  d3.select("#t" + i).remove();  // Remove text location
-}
-
-
-//Function to choose what color circle we have
-//Let's return blue for males and red for females
-function rectColour(d){
-  if(d.sex =="M"){
-      return "blue";
-  } else {
-      return "blue";
-  }
-}
-
-
-function tickActions() {
-  //update circle positions to reflect node updates on each tick of the simulation
-  node.attr("x", function(d) { return d.x-radius/2; })
-      .attr("y", function(d) { return d.y-radius/2; })
-}
-
-
-
 //set up the simulation
 //nodes only for now
 var simulation = d3.forceSimulation()
@@ -189,6 +89,54 @@ var node = svg_graph.append("g")
 
 var lastCircle = null;
 
+function handleClick(d, i) {  // Add interactivity
+      if(lastCircle != null)
+      {
+          d3.select(lastCircle).attr("fill", "blue");
+      }
+
+      if(this == lastCircle)
+      {
+        d3.select(lastCircle).attr("fill", "blue");
+        lastCircle = null;
+      }
+      else
+      {
+        // Use D3 to select element, change color and size
+        d3.select(this).attr("fill", "orange");
+        lastCircle = this;
+      }
+    }
+
+// Create Event Handlers for mouse
+function handleMouseOver(d, i) {  // Add interactivity
+    // Specify where to put label of text
+    svg_graph.append("text").attr("id", "t" + i).attr("x", function() { return d.x - 30; }).attr("y", function() { return d.y - 15; })
+    .text(d.name);
+  }
+
+function handleMouseOut(d, i) {
+    // Select text by id and then remove
+    d3.select("#t" + i).remove();  // Remove text location
+  }
+
+
+//Function to choose what color circle we have
+//Let's return blue for males and red for females
+function rectColour(d){
+    if(d.sex =="M"){
+        return "blue";
+    } else {
+        return "blue";
+    }
+}
+
+
+function tickActions() {
+    //update circle positions to reflect node updates on each tick of the simulation
+    node.attr("x", function(d) { return d.x-radius/2; })
+        .attr("y", function(d) { return d.y-radius/2; })
+  }
 
 
 
@@ -211,35 +159,34 @@ var link = svg_graph.append("g")
       .style("stroke", linkColour);
 
 
-
-
-
-
-
-drag = simulation => {
-
-  function dragstarted(d) {
-    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-    d.fx = d.x;
-    d.fy = d.y;
-  }
-
-  function dragged(d) {
-    d.fx = d3.event.x;
-    d.fy = d3.event.y;
-  }
-
-  function dragended(d) {
-    if (!d3.event.active) simulation.alphaTarget(0);
-    d.fx = null;
-    d.fy = null;
-  }
-
-  return d3.drag()
-      .on("start", dragstarted)
-      .on("drag", dragged)
-      .on("end", dragended);
+//Function to choose the line colour and thickness
+//If the link type is "A" return green
+//If the link type is "E" return red
+function linkColour(d){
+    if(d.type == "A"){
+        return "green";
+    } else {
+        return "green";
+    }
 }
+
+
+// The complete tickActions function
+function tickActions() {
+    //update circle positions each tick of the simulation
+    node
+        .attr("x", function(d) { return d.x-radius/2; })
+        .attr("y", function(d) { return d.y-radius/2; });
+
+    //update link positions
+    //simply tells one end of the line to follow one node around
+    //and the other end of the line to follow the other node around
+    link
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+  }
 
 //create drag handler with d3.drag()
 var drag_handler = d3.drag()
@@ -247,11 +194,44 @@ var drag_handler = d3.drag()
     .on("drag", drag_drag)
     .on("end", drag_end);
 
+function drag_start(d) {
+  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+  d.fx = d.x;
+  d.fy = d.y;
+}
 
+function drag_drag(d) {
+  d.fx = d3.event.x;
+  d.fy = d3.event.y;
+}
 
+var fixedNodes = [];
 
+function drag_end(d) {
+  if (!d3.event.active) simulation.alphaTarget(0);
+  d.fx = d.x;
+  d.fy = d.y;
+  fixedNodes.push(d);
+}
+
+document.getElementById('body').addEventListener('keydown', (e) => {
+    if(e.key == "r")
+    {
+      console.log(fixedNodes);
+      for(d in fixedNodes)
+      {
+        fixedNodes[d].fx = null;
+        fixedNodes[d].fy = null;
+        console.log(d);
+      }
+
+      fixedNodes = [];
+
+      console.log(fixedNodes);
+    }
+});
 
 
 //apply the drag_handler to our circles
 drag_handler(node);
-drag_handler(links);
+drag_handler(link);
