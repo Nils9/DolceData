@@ -64,7 +64,7 @@ svg3.selectAll("text")
 .attr("x", (w-step)/2)
 .attr("y", (20+margin.top+margin.bottom)/2+10)
 .attr("font-family", "sans-serif")
-.attr("font-size", "11px")
+.attr("font-size", "13px")
 .attr("fill", "white")
 .attr("text-anchor", "middle");
 
@@ -87,7 +87,7 @@ svgFetiche.append("text")
 .attr("x", 0.4*w)
 .text(type1)
 .attr("font-family", "sans-serif")
-.attr("font-size", "11px")
+.attr("font-size", "13px")
 .attr("text-anchor", "middle");
 
 svgFetiche.append("rect")
@@ -102,7 +102,7 @@ svgFetiche.append("text")
 .attr("x", 0.4*w)
 .text(favorite1)
 .attr("font-family", "sans-serif")
-.attr("font-size", "11px")
+.attr("font-size", "13px")
 .attr("fill","white")
 .attr("text-anchor", "middle");
 
@@ -111,7 +111,7 @@ svgFetiche.append("text")
 .attr("x", 1.3*w)
 .text(type2)
 .attr("font-family", "sans-serif")
-.attr("font-size", "11px")
+.attr("font-size", "13px")
 .attr("text-anchor", "middle");
 
 svgFetiche.append("rect")
@@ -127,10 +127,13 @@ svgFetiche.append("text")
 .attr("x", 1.3*w)
 .text(favorite2)
 .attr("font-family", "sans-serif")
-.attr("font-size", "11px")
+.attr("font-size", "13px")
 .attr("fill","white")
 .attr("text-anchor", "middle");
 
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
 svg1.selectAll("rect")
     .data(dataset)
@@ -142,10 +145,19 @@ svg1.selectAll("rect")
     .attr("height", function(d) {return d[1]*100/sum;})
     .attr('fill', function(d) { return colors[d[0]];})
     .on('mouseover', function (d, i) {
+          div.transition()
+             .duration(50)
+             .style("opacity", .9);
+          div.html(d[0]+"<br/>"+d[1]+" films")
+             .style("left", (d3.event.pageX) + "px")
+             .style("top", (d3.event.pageY - 28) + "px");
           d3.select(this).transition()
-               .duration('200')
+               .duration('50')
                .attr('opacity', '.40')})
      .on('mouseout', function (d, i) {
+        div.transition()
+               .duration(50)
+               .style("opacity", 0);
           d3.select(this).transition()
                .duration('50')
                .attr('opacity', '1')});
@@ -160,13 +172,22 @@ svg2.selectAll("rect")
     .attr("height", function(d) {return d[1]*100/sum;})
     .attr('fill', function(d) { return colors[d[0]];})
     .on('mouseover', function (d, i) {
+          div.transition()
+             .duration(50)
+             .style("opacity", .9);
+          div.html(d[0]+"<br/>"+d[1]+" films")
+             .style("left", (d3.event.pageX) + "px")
+             .style("top", (d3.event.pageY - 28) + "px");
           d3.select(this).transition()
                .duration('50')
                .attr('opacity', '.40')})
-    .on('mouseout', function (d, i) {
-        d3.select(this).transition()
-             .duration('50')
-             .attr('opacity', '1')});
+     .on('mouseout', function (d, i) {
+        div.transition()
+               .duration(50)
+               .style("opacity", 0);
+          d3.select(this).transition()
+               .duration('50')
+               .attr('opacity', '1')});
 
 //Partie chart
 var margin = {top: 50, right: 50, bottom: 50, left: 50}
@@ -191,11 +212,11 @@ var svg4 = d3.select("#chart").append("svg").attr("width", width + margin.left +
 svg4.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(xScale));
+    .call(d3.axisBottom(xScale).tickFormat(d3.format("d")));
 
 svg4.append("g")
     .attr("class", "y axis")
-    .call(d3.axisLeft(yScale));
+    .call(d3.axisLeft(yScale).tickFormat(x => x + "%"));
 
 var linef = d3.line().curve(d3.curveBasis).x(function(d) { return xScale(d.x) }).y(function(d) { return yScale(d.y) })
 
