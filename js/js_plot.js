@@ -91,11 +91,11 @@ var yScale = d3.scaleLinear()
 
 //Define X axis
 var xAxis = d3.axisBottom()
-              .scale(xScale);
+              .scale(xScale).tickFormat(d3.format("d"));
 
 //Define Y axis
 var yAxis = d3.axisLeft()
-              .scale(yScale);
+              .scale(yScale).tickFormat(x => x + "%");
 
 // Draw the data
 function draw(dataset) {

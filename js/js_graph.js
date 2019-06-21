@@ -187,31 +187,6 @@ function tickActions() {
         .attr("y2", function(d) { return d.target.y; });
   }
 
-drag = simulation => {
-
-  function dragstarted(d) {
-    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-    d.fx = d.x;
-    d.fy = d.y;
-  }
-
-  function dragged(d) {
-    d.fx = d3.event.x;
-    d.fy = d3.event.y;
-  }
-
-  function dragended(d) {
-    if (!d3.event.active) simulation.alphaTarget(0);
-    d.fx = null;
-    d.fy = null;
-  }
-
-  return d3.drag()
-      .on("start", dragstarted)
-      .on("drag", dragged)
-      .on("end", dragended);
-}
-
 //create drag handler with d3.drag()
 var drag_handler = d3.drag()
     .on("start", drag_start)
@@ -229,13 +204,33 @@ function drag_drag(d) {
   d.fy = d3.event.y;
 }
 
+var fixedNodes = [];
+
 function drag_end(d) {
   if (!d3.event.active) simulation.alphaTarget(0);
   d.fx = d.x;
   d.fy = d.y;
+  fixedNodes.push(d);
 }
+
+document.getElementById('body').addEventListener('keydown', (e) => {
+    if(e.key == "r")
+    {
+      console.log(fixedNodes);
+      for(d in fixedNodes)
+      {
+        fixedNodes[d].fx = null;
+        fixedNodes[d].fy = null;
+        console.log(d);
+      }
+
+      fixedNodes = [];
+
+      console.log(fixedNodes);
+    }
+});
 
 
 //apply the drag_handler to our circles
 drag_handler(node);
-drag_handler(links);
+drag_handler(link);
