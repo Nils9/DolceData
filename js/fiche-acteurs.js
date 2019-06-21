@@ -22,26 +22,26 @@ const sum2 = nb2.reduce(function(a, b) {return a + b;});
 
 
 // Largeur et hauteur
-var w = 50*dataset.length;
-var h = 100;
+var w2 = 50*dataset.length;
+var h2 = 100;
 var margin = { top: 10, right: 0, bottom: 10, left: 0};
-var step = (w-40*dataset.length)/dataset.length;
+var step = (w2-40*dataset.length)/dataset.length;
 var colors = {"Action":"red", "Adventure":"darkgoldenrod", "Comedy":"blue", "Crime":"crimson", "Drama":"purple", "Fantasy":"chartreuse", "Horror":"black", "Music":"chocolate", "Mystery":"yellow", "Romance":"palevioletred", "Science Fiction":"green", "Short":"coral", "War":"olive",  "Western":"khaki", "Westerns":"khaki"}
 
 var svg1 = d3.select("#haut")
             .append("svg")
-            .attr("width", w)
-            .attr("height", h)
+            .attr("width", w2)
+            .attr("height", h2)
 
 var svg2 = d3.select("#bas")
             .append("svg")
-            .attr("width", w)
-            .attr("height", h)
+            .attr("width", w2)
+            .attr("height", h2)
             .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
 var svg3 = d3.select("#actor")
             .append("svg")
-            .attr("width", w-step)
+            .attr("width", w2-step)
             .attr("height", 20+margin.top+margin.bottom);
             /*.append("rect")
             .attr("width", w-step)
@@ -50,7 +50,7 @@ var svg3 = d3.select("#actor")
             .attr('transform', `translate(${margin.left}, ${margin.top})`);*/
 
 svg3.append("rect")
-.attr("width", w-step)
+.attr("width", w2-step)
 .attr("height", 20+margin.top+margin.bottom)
 .style("fill", "black")
 .attr('transform', `translate(${margin.left}, ${margin.top})`);
@@ -61,7 +61,7 @@ svg3.selectAll("text")
 .append("text")
 .text(function(d) {console.log(d); return d;})
 //.text("Antonio Banderas")
-.attr("x", (w-step)/2)
+.attr("x", (w2-step)/2)
 .attr("y", (20+margin.top+margin.bottom)/2+10)
 .attr("font-family", "sans-serif")
 .attr("font-size", "13px")
@@ -84,7 +84,7 @@ var svgFetiche = d3.select("#fetiche1")
 
 svgFetiche.append("text")
 .attr("y", 20)
-.attr("x", 0.4*w)
+.attr("x", 0.4*w2)
 .text(type1)
 .attr("font-family", "sans-serif")
 .attr("font-size", "13px")
@@ -92,14 +92,14 @@ svgFetiche.append("text")
 
 svgFetiche.append("rect")
 .attr("y", 15)
-.attr("width", 0.8*w)
-.attr("height", h/5)
+.attr("width", 0.8*w2)
+.attr("height", h2/5)
 .style("fill", "black")
 .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
 svgFetiche.append("text")
-.attr("y", 20+0.19*h)
-.attr("x", 0.4*w)
+.attr("y", 20+0.19*h2)
+.attr("x", 0.4*w2)
 .text(favorite1)
 .attr("font-family", "sans-serif")
 .attr("font-size", "13px")
@@ -108,7 +108,7 @@ svgFetiche.append("text")
 
 svgFetiche.append("text")
 .attr("y", 20)
-.attr("x", 1.3*w)
+.attr("x", 1.3*w2)
 .text(type2)
 .attr("font-family", "sans-serif")
 .attr("font-size", "13px")
@@ -116,15 +116,15 @@ svgFetiche.append("text")
 
 svgFetiche.append("rect")
 .attr("y", 15)
-.attr("x", 0.9*w)
-.attr("width", 0.8*w)
-.attr("height", h/5)
+.attr("x", 0.9*w2)
+.attr("width", 0.8*w2)
+.attr("height", h2/5)
 .style("fill", "black")
 .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
 svgFetiche.append("text")
-.attr("y", 20+0.19*h)
-.attr("x", 1.3*w)
+.attr("y", 20+0.19*h2)
+.attr("x", 1.3*w2)
 .text(favorite2)
 .attr("font-family", "sans-serif")
 .attr("font-size", "13px")
@@ -139,8 +139,8 @@ svg1.selectAll("rect")
     .data(dataset)
     .enter()
     .append("rect")
-    .attr("x", function(d, i) {return i * w/dataset.length;})
-    .attr("y", function(d) {return h-d[1]*100/sum;})
+    .attr("x", function(d, i) {return i * w2/dataset.length;})
+    .attr("y", function(d) {return h2-d[1]*100/sum;})
     .attr("width", 40)
     .attr("height", function(d) {return d[1]*100/sum;})
     .attr('fill', function(d) { return colors[d[0]];})
@@ -166,7 +166,7 @@ svg2.selectAll("rect")
     .data(dataset2)
     .enter()
     .append("rect")
-    .attr("x", function(d, j) {return j * w/dataset2.length;})
+    .attr("x", function(d, j) {return j * w2/dataset2.length;})
     .attr("y", 0)
     .attr("width", 40)
     .attr("height", function(d) {return d[1]*100/sum;})

@@ -1,6 +1,8 @@
 // Set the dimensions of the canvas / graph
-const h = 600;
-const w = 600;
+var svg_plot = d3.select("#canvas_svg"),
+ w = +svg_plot.node().getBoundingClientRect().width,
+ h = +svg_plot.node().getBoundingClientRect().height;
+ console.log("plot " + w + " " + h);
 var dataset = [];
 
 var padding = 50;
@@ -34,8 +36,7 @@ d3.csv("data/film.csv")
 var canvas = d3.select("#canvas");
 
 //Create SVG element
-var svg = canvas
-            .append("svg")
+var svg = d3.select("#canvas_svg")
             .attr("width", w)
             .attr("height", h);
 
@@ -83,11 +84,11 @@ function circleColour(d){
 
 var xScale = d3.scaleLinear()
                 .domain([1920, 1997])
-                .range([0, 600 - 3 * padding + 10]);
+                .range([0, w - 3 * padding]);
 
 var yScale = d3.scaleLinear()
                 .domain([0, 100])
-                .range([600 - 3 * padding + 10, 0]);
+                .range([h - 3 * padding +8, 0]);
 
 //Define X axis
 var xAxis = d3.axisBottom()

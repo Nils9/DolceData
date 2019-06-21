@@ -1,7 +1,8 @@
 //create somewhere to put the force directed graph
 var svg_graph = d3.select("#graph"),
- width = +svg_graph.attr("width"),
- height = +svg_graph.attr("height");
+ width = +svg_graph.node().getBoundingClientRect().width,
+ height = +svg_graph.node().getBoundingClientRect().height;
+ console.log("graph " + width + " " + height);
 
 //d3 code goes here
 
