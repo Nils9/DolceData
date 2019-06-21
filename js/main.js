@@ -257,7 +257,7 @@ function getLinks(films, director){
   var actors = {};
   for(var i = 0; i< films.length; i++) {
     if(films[i].director == director){
-      
+
       if(films[i].actor in actors ){
         actors[films[i].actor]+=1;
       }
@@ -275,7 +275,7 @@ function getLinks(films, director){
   }
   var links = [];
   for(key in actors) {
-    link = {"director": director, "actor": key, "nbOfFilm": actors[key]};
+    link = {"source": director, "target": key, "nbOfFilm": actors[key]};
     links.push(link);
   }
   return links;
