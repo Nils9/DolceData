@@ -1,3 +1,7 @@
+function updateFicheActeurs(){
+  console.log("on va updater la fiche acteurs");
+}
+
 var actorName = ["Antonio Banderas"];
 var dataset = [["Western", 3], ["Adventure", 10], ["Crime", 2]];
 var dataset2 = [["Fantasy", 5], ["Horror", 4], ["Music", 12]];
@@ -43,11 +47,6 @@ var svg3 = d3.select("#actor")
             .append("svg")
             .attr("width", w2-step)
             .attr("height", 20+margin.top+margin.bottom);
-            /*.append("rect")
-            .attr("width", w-step)
-            .attr("height", 20+margin.top+margin.bottom)
-            .style("fill", "red")
-            .attr('transform', `translate(${margin.left}, ${margin.top})`);*/
 
 svg3.append("rect")
 .attr("width", w2-step)
@@ -230,4 +229,4 @@ svg4.append("text")
         .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
-        .text("Evolution de sa popularité");
+        .text("Evolution de sa popularité");*/

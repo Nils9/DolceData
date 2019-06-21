@@ -16,6 +16,8 @@ let code = d3.select("#code");
 let zone = d3.select("#pop_select");
 
 
+
+
 d3.csv("data/film.csv")
 .row(function (d) {
   return {
@@ -156,7 +158,7 @@ function favoriteDirector(films, person){
         directors[films[i].director] = directors[films[i].director]+1;
       }
       else{
-        directors[films[i].director] = 1;
+          directors[films[i].director] = 1;
       }
     }
   }
