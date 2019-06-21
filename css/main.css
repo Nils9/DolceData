@@ -1,0 +1,21 @@
+svg {
+  border: solid black 1px;
+}
+
+body {
+  display: flex;
+
+  flex-flow: row no-wrap;
+}
+
+#canvas {
+  justify-content: flex-end;
+
+  align-items: flex-start;
+}
+
+#graph {
+  justify-content: flex-start;
+
+  align-items: flex-start;
+}
