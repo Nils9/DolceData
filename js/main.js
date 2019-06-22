@@ -1,20 +1,6 @@
-
-const w = 500;
-const h = 500;
-const padX = 30;
-const padY = 30;
 var dataset = [];
-var x;
-var y;
-let clickX;
-let clickY;
-let firstclick = false;
-let canvas = d3.select("#canvas");
-var svg = canvas.append("svg").attr("width", w).attr("height", h);
-let place = d3.select("#place");
-let code = d3.select("#code");
-let zone = d3.select("#pop_select");
-
+var films = [];
+var person = "De Niro - Robert";
 
 d3.csv("data/film.csv")
 .row(function (d) {
@@ -42,9 +28,11 @@ d3.csv("data/film.csv")
   x = d3.scaleLinear().domain(d3.extent(rows, (row) => row.long)).range([0, w]);
   y = d3.scaleLinear().domain(d3.extent(rows, (row) => row.lat)).range([h, 0]);
   dataset = rows;
-  let ff = yearFilter(dataset, 1975, 1980);
+  let yearMin =  1960;
+  let yearMax = 1997;
+  let ff = yearFilter(dataset, yearMin, yearMax);
   console.log(ff);
-  let person = "Redford - Robert";
+  
   let popu = getPopularity(ff, person);
   console.log("Popularity of "+  person +" : " + popu);
   let award = getNbOfAwards(ff, person);
@@ -59,7 +47,11 @@ d3.csv("data/film.csv")
   console.log("All Nodes");
   let nodes = computeAllNodes(ff);
   console.log(nodes);
-  //draw();
+  films =ff;
+  drawFicheActeur(ff, yearMin, yearMax, person);
+  
+ 
+  
 });
 
 function yearFilter(films, date_min, date_max) {
@@ -168,8 +160,20 @@ function favoriteDirector(films, person){
   else {
     return 0;
   }
-  
 }
+
+function getPopularityPerYear(films, yearMin, yearMax, actor){
+  var data = [];
+  for(var i = yearMin; i<=yearMax; i++){
+    var dict = {};
+    dict["x"] = i;
+    var filmsOfYear = yearFilter(films, i, i);
+    dict["y"] = getPopularity(filmsOfYear, actor);
+    data.push(dict);
+  }
+  return data;
+}
+
 
 function allDirectors(films) {
     var director_set = new Set([]);
