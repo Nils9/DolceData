@@ -1,5 +1,5 @@
 var actorName = ["Antonio Banderas"];
-var dataset = [["Western", 3], ["Adventure", 10], ["Crime", 2]];
+var dataset1 = [["Western", 3], ["Adventure", 10], ["Crime", 2]];
 var dataset2 = [["Fantasy", 5], ["Horror", 4], ["Music", 12]];
 var dataset3 = [[1921, 57], [1957, 81]];
 var nbAwards = 4;
@@ -9,8 +9,8 @@ var type2 = "Actrice fétiche"
 var favorite2 = "Pénélope Cruz"
 
 var nb = []
-for (i = 0; i < dataset.length; i++) {
-  nb.push(dataset[i][1]);
+for (i = 0; i < dataset1.length; i++) {
+  nb.push(dataset1[i][1]);
 }
 var nb2 = []
 for (i = 0; i < dataset2.length; i++) {
@@ -22,10 +22,10 @@ const sum2 = nb2.reduce(function(a, b) {return a + b;});
 
 
 // Largeur et hauteur
-var w2 = 50*dataset.length;
+var w2 = 50*dataset1.length;
 var h2 = 100;
 var margin = { top: 10, right: 0, bottom: 10, left: 0};
-var step = (w2-40*dataset.length)/dataset.length;
+var step = (w2-40*dataset1.length)/dataset1.length;
 var colors = {"Action":"red", "Adventure":"darkgoldenrod", "Comedy":"blue", "Crime":"crimson", "Drama":"purple", "Fantasy":"chartreuse", "Horror":"black", "Music":"chocolate", "Mystery":"yellow", "Romance":"palevioletred", "Science Fiction":"green", "Short":"coral", "War":"olive",  "Western":"khaki", "Westerns":"khaki"}
 
 var svg1 = d3.select("#haut")
@@ -59,7 +59,7 @@ svg3.selectAll("text")
 .data(actorName)
 .enter()
 .append("text")
-.text(function(d) {console.log(d); return d;})
+.text(function(d) { return d;})
 //.text("Antonio Banderas")
 .attr("x", (w2-step)/2)
 .attr("y", (20+margin.top+margin.bottom)/2+10)
@@ -132,14 +132,14 @@ svgFetiche.append("text")
 .attr("text-anchor", "middle");
 
 var div = d3.select("body").append("div")
-    .attr("class", "tooltip")
+    .attr("class", "tooltip_fiche")
     .style("opacity", 0);
 
 svg1.selectAll("rect")
-    .data(dataset)
+    .data(dataset1)
     .enter()
     .append("rect")
-    .attr("x", function(d, i) {return i * w2/dataset.length;})
+    .attr("x", function(d, i) {return i * w2/dataset1.length;})
     .attr("y", function(d) {return h2-d[1]*100/sum;})
     .attr("width", 40)
     .attr("height", function(d) {return d[1]*100/sum;})
