@@ -48,6 +48,7 @@ function getNbOfAwards(films, person) {
       n = n + 1;
     }
   }
+  console.log("Number of Awards "+ person +" : " + n);
   return n;
 }
 
@@ -74,7 +75,7 @@ function getFilmsPerSubject(films, person){
 function getSixSubjects(films, person){
   var dict = getFilmsPerSubject(films, person);
   var filmsPerSubject = sort_object(dict);
-
+  //console.log("Person film per subject : " + filmsPerSubject.slice(0,6));
   return filmsPerSubject.slice(0,6);
 
 }
@@ -105,8 +106,20 @@ function favoriteDirector(films, person){
   else {
     return 0;
   }
-
 }
+
+function getPopularityPerYear(films, yearMin, yearMax, actor){
+  var data = [];
+  for(var i = yearMin; i<=yearMax; i++){
+    var dict = {};
+    dict["x"] = i;
+    var filmsOfYear = yearFilter(films, i, i);
+    dict["y"] = getPopularity(filmsOfYear, actor);
+    data.push(dict);
+  }
+  return data;
+}
+
 
 function allDirectors(films) {
     var director_set = new Set([]);
