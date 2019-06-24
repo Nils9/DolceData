@@ -56,20 +56,21 @@ d3.csv("data/film.csv")
 
 function yearFilter(films, date_min, date_max) {
   let set = [];
-  console.log("Year filter " +date_min + " to "+ date_max );
+  console.log(date_min + " " + date_max);
   for(var i = 0; i<films.length; i++) {
     let myear = films[i].year;
     if ((myear<=date_max) && (myear>=date_min)) {
       set.push(films[i]);
+
     }
   }
-  console.log("-> Total: " + set.length + " films");
+  console.log(set);
   return set;
 }
 
 function popularityFilter(films, pop_min, pop_max) {
   let set = [];
-  console.log("Popularity filter " +pop_min + " to "+ pop_max );
+  console.log(pop_min + " " + pop_max);
   for(var i = 0; i<films.length; i++) {
     let mpop = films[i].popularity;
     if ((mpop<=pop_max) && (mpop>=pop_min)) {
@@ -77,7 +78,7 @@ function popularityFilter(films, pop_min, pop_max) {
 
     }
   }
-  console.log("-> Total: " + set.length + " films");
+  console.log(set);
   return set;
 }
 
@@ -90,7 +91,7 @@ function getPopularity(films, person) {
       popu = popu + films[i].popularity;
     }
   }
-  
+
   return popu;
 }
 
@@ -102,7 +103,6 @@ function getNbOfAwards(films, person) {
       n = n + 1;
     }
   }
-  console.log("Number of Awards "+ person +" : " + n);
   return n;
 }
 
@@ -129,7 +129,7 @@ function getFilmsPerSubject(films, person){
 function getSixSubjects(films, person){
   var dict = getFilmsPerSubject(films, person);
   var filmsPerSubject = sort_object(dict);
-  //console.log("Person film per subject : " + filmsPerSubject.slice(0,6));
+
   return filmsPerSubject.slice(0,6);
 
 }
@@ -177,16 +177,16 @@ function getPopularityPerYear(films, yearMin, yearMax, actor){
 
 function allDirectors(films) {
     var director_set = new Set([]);
-  
+
     for(var i = 0; i<films.length; i++) {
       var dir = films[i].director;
-      if (typeof dir === 'undefined' || dir == "" ) {
+      if (typeof dir === 'undefined' || dir === "" ) {
         // variable is undefined
       }
       else {
-        director_set = director_set.add(films[i].director);  
+        director_set = director_set.add(films[i].director);
       }
-          
+
     }
     return director_set;
 }
@@ -232,24 +232,31 @@ function computeAllNodes(films) {
 
   var nodes = [];
   for (let dir of directors) {
-    node = {"name": dir, 
-            "category": "director", 
-            "popularity": getPopularity(films, dir),
-            "favSubject": getFavoriteSubject(films, dir)};
-    nodes.push(node);
+    if(!dir || 0 === dir.length)
+    {
+      console.log("director unknown!");
+    }
+    else
+    {
+      node = {"name": dir,
+              "category": "director",
+              "popularity": getPopularity(films, dir),
+              "favSubject": getFavoriteSubject(films, dir)};
+      nodes.push(node);
+    }
   }
 
   for (let act of actors) {
-    node = {"name": act, 
-            "category": "actor", 
+    node = {"name": act,
+            "category": "actor",
             "popularity": getPopularity(films, act),
             "favSubject": getFavoriteSubject(films, act)};
     nodes.push(node);
   }
 
   for (let act of actresses) {
-    node = {"name": act, 
-            "category": "actress", 
+    node = {"name": act,
+            "category": "actress",
             "popularity": getPopularity(films, act),
             "favSubject": getFavoriteSubject(films, act)};
     nodes.push(node);
@@ -261,12 +268,18 @@ function computeAllNodes(films) {
 
 function computeAllLinks(films) {
   var directors = allDirectors(films);
-  console.log(directors);
+
   var links = [];
   for (let dir of directors) {
-    var link = getLinks(films, dir);
-    links = links.concat(getLinks(films, dir));
+    if(!dir || 0 === dir.length)
+    {
+      console.log("director unknown!");
+    }
+    else
+    {
+      var link = getLinks(films, dir);
+      links = links.concat(getLinks(films, dir));
+    }
   }
-  return links; 
+  return links;
 }
-
