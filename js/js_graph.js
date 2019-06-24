@@ -175,8 +175,8 @@ function linkColour(d){
 function tickActions() {
     //update circle positions each tick of the simulation
     node
-        .attr("x", function(d) { return d.x-radius/2; })
-        .attr("y", function(d) { return d.y-radius/2; });
+        .attr("cx", function(d) { return d.x-radius/2; })
+        .attr("cy", function(d) { return d.y-radius/2; });
 
     //update link positions
     //simply tells one end of the line to follow one node around
