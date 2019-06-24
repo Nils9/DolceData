@@ -1,6 +1,5 @@
 function drawGraph(dataset)
 {
-  console.log("draw!");
   //create somewhere to put the force directed graph
   var svg_graph = d3.select("#graph"),
    width = +svg_graph.node().getBoundingClientRect().width,
@@ -9,7 +8,7 @@ function drawGraph(dataset)
   svg_graph.selectAll("*").remove();
 
   var nodes_data = computeAllNodes(dataset);
-  console.log(dataset);
+
   var links_data = computeAllLinks(dataset);
 
   //set up the simulation
@@ -45,8 +44,10 @@ function drawGraph(dataset)
           .append("rect")
           .attr("width", radius)
           .attr("height", radius)
-          .attr("rx", d => d.category == "director" ? 100 : 0)
+          .attr("rx", d => d.category != "director" ? 100 : 0)
           .attr("fill", nodeColour)
+          .style("stroke", "green")
+          .attr("stroke-width", 0)
           .on("click", handleClick)
           .on("mouseover", handleMouseOver)
           .on("mouseout", handleMouseOut);
@@ -56,19 +57,20 @@ function drawGraph(dataset)
   function handleClick(d, i) {  // Add interactivity
         if(lastCircle != null)
         {
-            d3.select(lastCircle).attr("fill", nodeColour(d));
+            d3.select(lastCircle).attr("stroke-width", 0);
         }
 
         if(this == lastCircle)
         {
-          d3.select(lastCircle).attr("fill", nodeColour(d));
+          d3.select(lastCircle).attr("stroke-width", 0);
           lastCircle = null;
         }
         else
         {
           // Use D3 to select element, change color and size
-          d3.select(this).attr("fill", "orange");
+          d3.select(this).attr("stroke-width", 2);
           lastCircle = this;
+          drawFiche("Antonio");
         }
       }
 
