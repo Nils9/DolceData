@@ -70,7 +70,8 @@ function drawGraph(dataset)
           // Use D3 to select element, change color and size
           d3.select(this).attr("stroke-width", 2);
           lastCircle = this;
-          drawFiche("Antonio");
+          console.log("handle!");
+          drawFicheActeur(dataset, 1900, 2010, d.name);
         }
       }
 

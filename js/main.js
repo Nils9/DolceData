@@ -1,7 +1,7 @@
 
 function yearFilter(films, date_min, date_max) {
   let set = [];
-  console.log(date_min + " " + date_max);
+  console.log("year " + date_min + " " + date_max);
   for(var i = 0; i<films.length; i++) {
     let myear = films[i].year;
     if ((myear<=date_max) && (myear>=date_min)) {
@@ -9,13 +9,12 @@ function yearFilter(films, date_min, date_max) {
 
     }
   }
-  console.log(set);
   return set;
 }
 
 function popularityFilter(films, pop_min, pop_max) {
   let set = [];
-  console.log(pop_min + " " + pop_max);
+  console.log("pop " + pop_min + " " + pop_max);
   for(var i = 0; i<films.length; i++) {
     let mpop = films[i].popularity;
     if ((mpop<=pop_max) && (mpop>=pop_min)) {
@@ -23,7 +22,6 @@ function popularityFilter(films, pop_min, pop_max) {
 
     }
   }
-  console.log(set);
   return set;
 }
 

@@ -31,7 +31,6 @@ d3.csv("data/film.csv")
       dataset = rows;
       draw(dataset);
       drawGraph(dataset);
-      drawFiche("Blabla");
   });
 
 var canvas = d3.select("#canvas");
