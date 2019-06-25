@@ -1,6 +1,6 @@
-var dataset = [];
-var films = [];
-var person = "De Niro - Robert";
+// var dataset = [];
+// var films = [];
+// var person = "De Niro - Robert";
 
 d3.csv("data/film.csv")
 .row(function (d) {
