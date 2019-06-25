@@ -1,4 +1,4 @@
-function drawGraph(dataset)
+function drawGraph(dataset, yearMin, yearMax)
 {
   //create somewhere to put the force directed graph
   var svg_graph = d3.select("#graph"),
@@ -71,7 +71,7 @@ function drawGraph(dataset)
           d3.select(this).attr("stroke-width", 2);
           lastCircle = this;
           console.log("handle!");
-          drawFicheActeur(dataset, 1900, 2010, d.name, d.category);
+          drawFicheActeur(dataset, yearMin, yearMax, d.name, d.category);
         }
       }
 

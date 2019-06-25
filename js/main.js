@@ -151,6 +151,7 @@ function favoriteActor(films, person){
 }
 
 function getPopularityPerYear(films, yearMin, yearMax, actor){
+  console.log("test getPopularityPerYear: "+ yearMin + " " + yearMax);
   var data = [];
   for(var i = yearMin; i<=yearMax; i++){
     var dict = {};

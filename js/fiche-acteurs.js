@@ -16,7 +16,7 @@ function drawFicheActeur(films, yearMin, yearMax, person, category) {
    else if (category == "actress") {
      var type1 = "Réalisateur fétiche";
      var favorite1 = favoriteDirector(films, person);
-     var type2 = "Acteurr fétiche";
+     var type2 = "Acteur fétiche";
      var favorite2 = favoriteActor(films, person);
    }
    else{
@@ -27,7 +27,7 @@ function drawFicheActeur(films, yearMin, yearMax, person, category) {
    }
 
    //var data = [{x: 1920, y: 20}, {x: 1950, y: 50}, {x: 1970, y: 87}, {x: 1980, y: 70}, {x: 1990, y: 10}];
-   var data = getPopularityPerYear(films, yearMin, yearMax, person);
+   var data = getPopularityPerYear(films, Math.floor(yearMin), Math.floor(yearMax), person);
 
    var nb = []
    for (i = 0; i < dataset.length; i++) {
