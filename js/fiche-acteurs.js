@@ -149,8 +149,8 @@ function drawFicheActeur(films, yearMin, yearMax, person, category) {
    .attr("text-anchor", "middle");
 
    var div = d3.select("body").append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
+      .attr("class", "tooltip_fiche")
+      .style("opacity", 0)
 
    svg1.selectAll("rect")
       .data(dataset)
@@ -165,12 +165,13 @@ function drawFicheActeur(films, yearMin, yearMax, person, category) {
             div.transition()
                .duration(50)
                .style("opacity", .9);
-            div.html(d[0]+"<br/>"+d[1]+" films")
-               .style("left", (d3.event.pageX) + "px")
-               .style("top", (d3.event.pageY - 28) + "px");
+            div.html(d[0]+"<br/>"+d[1]+" films");
             d3.select(this).transition()
                .duration('50')
                .attr('opacity', '.40')})
+      .on('mousemove', function (d,i) {
+          div.style("left", (d3.event.pageX) + "px")
+              .style("top", (d3.event.pageY - 28) + "px")})
       .on('mouseout', function (d, i) {
          div.transition()
                .duration(50)
@@ -192,17 +193,18 @@ function drawFicheActeur(films, yearMin, yearMax, person, category) {
             div.transition()
                .duration(50)
                .style("opacity", .9);
-            div.html(d[0]+"<br/>"+d[1]+" films")
-               .style("left", (d3.event.pageX) + "px")
-               .style("top", (d3.event.pageY - 28) + "px");
+            div.html(d[0]+"<br/>"+d[1]+" films");
             d3.select(this).transition()
                .duration('50')
                .attr('opacity', '.40')})
+     .on('mousemove', function (d,i) {
+         div.style("left", (d3.event.pageX) + "px")
+             .style("top", (d3.event.pageY - 28) + "px")})
       .on('mouseout', function (d, i) {
          div.transition()
                .duration(50)
                .style("opacity", 0);
-            d3.select(this).transition()
+          d3.select(this).transition()
                .duration('50')
                .attr('opacity', '1')});
 
