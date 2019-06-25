@@ -30,7 +30,7 @@ d3.csv("data/film.csv")
         .range([h - padding * 2, padding]);
       dataset = rows;
       draw(dataset);
-      drawGraph(dataset);
+      drawGraph(dataset, 1920, 1997);
   });
 
 var canvas = d3.select("#canvas");
@@ -195,7 +195,7 @@ canvas.on("mouseup", function() {
     var c = Math.min(d3.mouse(this)[1], clickY);
     var d = Math.max(d3.mouse(this)[1], clickY);
 
-    drawGraph(popularityFilter(yearFilter(dataset, xScale.invert(a-45), xScale.invert(b-45)), -0.2174*d+110, -0.2174*c+110));
+    drawGraph(popularityFilter(yearFilter(dataset, xScale.invert(a-45), xScale.invert(b-45)), -0.2174*d+110, -0.2174*c+110), xScale.invert(a-45), xScale.invert(b-45));
 
     if(a == b && c == d)
     {
