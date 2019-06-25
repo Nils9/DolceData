@@ -1,19 +1,6 @@
 
-const w = 500;
-const h = 500;
-const padX = 30;
-const padY = 30;
 var dataset = [];
-var x;
-var y;
-let clickX;
-let clickY;
-let firstclick = false;
-let canvas = d3.select("#canvas");
-var svg = canvas.append("svg").attr("width", w).attr("height", h);
-let place = d3.select("#place");
-let code = d3.select("#code");
-let zone = d3.select("#pop_select");
+
 
 
 
@@ -100,7 +87,7 @@ function getPopularity(films, person) {
       popu = popu + films[i].popularity;
     }
   }
-  
+
   return popu;
 }
 
@@ -170,21 +157,21 @@ function favoriteDirector(films, person){
   else {
     return 0;
   }
-  
+
 }
 
 function allDirectors(films) {
     var director_set = new Set([]);
-  
+
     for(var i = 0; i<films.length; i++) {
       var dir = films[i].director;
       if (typeof dir === 'undefined' || dir == "" ) {
         // variable is undefined
       }
       else {
-        director_set = director_set.add(films[i].director);  
+        director_set = director_set.add(films[i].director);
       }
-          
+
     }
     return director_set;
 }
@@ -230,24 +217,24 @@ function computeAllNodes(films) {
 
   var nodes = [];
   for (let dir of directors) {
-    node = {"name": dir, 
-            "category": "director", 
+    node = {"name": dir,
+            "category": "director",
             "popularity": getPopularity(films, dir),
             "favSubject": getFavoriteSubject(films, dir)};
     nodes.push(node);
   }
 
   for (let act of actors) {
-    node = {"name": act, 
-            "category": "actor", 
+    node = {"name": act,
+            "category": "actor",
             "popularity": getPopularity(films, act),
             "favSubject": getFavoriteSubject(films, act)};
     nodes.push(node);
   }
 
   for (let act of actresses) {
-    node = {"name": act, 
-            "category": "actress", 
+    node = {"name": act,
+            "category": "actress",
             "popularity": getPopularity(films, act),
             "favSubject": getFavoriteSubject(films, act)};
     nodes.push(node);
@@ -265,6 +252,5 @@ function computeAllLinks(films) {
     var link = getLinks(films, dir);
     links = links.concat(getLinks(films, dir));
   }
-  return links; 
+  return links;
 }
-

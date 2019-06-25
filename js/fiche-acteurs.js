@@ -1,7 +1,3 @@
-function updateFicheActeurs(){
-  console.log("on va updater la fiche acteurs");
-}
-
 var actorName = ["Antonio Banderas"];
 var dataset = [["Western", 3], ["Adventure", 10], ["Crime", 2]];
 var dataset2 = [["Fantasy", 5], ["Horror", 4], ["Music", 12]];
@@ -229,4 +225,4 @@ svg4.append("text")
         .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
-        .text("Evolution de sa popularité");*/
+        .text("Evolution de sa popularité");
