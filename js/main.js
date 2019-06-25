@@ -106,6 +106,50 @@ function favoriteDirector(films, person){
   }
 }
 
+function favoriteActress(films, person){
+  var actresses = {};
+  for(var i = 0; i<films.length; i++) {
+    if ((films[i].actor ==  person)||(films[i].director ==  person)) {
+      if(films[i].actress in actresses){
+        directors[films[i].actress] = actresses[films[i].actress]+1;
+      }
+      else{
+        actresses[films[i].actress] = 1;
+      }
+    }
+  }
+  sortedActresses = sort_object(actresses);
+  if (sortedActresses.length > 0) {
+    return sortedActresses[0][0];
+  }
+
+  else {
+    return 0;
+  }
+}
+
+function favoriteActor(films, person){
+  var actors = {};
+  for(var i = 0; i<films.length; i++) {
+    if ((films[i].actress ==  person)||(films[i].director ==  person)) {
+      if(films[i].actor in actors){
+        actors[films[i].actor] = actors[films[i].actor]+1;
+      }
+      else{
+        actors[films[i].actor] = 1;
+      }
+    }
+  }
+  sortedActors = sort_object(actors);
+  if (sortedActors.length > 0) {
+    return sortedActors[0][0];
+  }
+
+  else {
+    return 0;
+  }
+}
+
 function getPopularityPerYear(films, yearMin, yearMax, actor){
   var data = [];
   for(var i = yearMin; i<=yearMax; i++){

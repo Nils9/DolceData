@@ -1,18 +1,33 @@
-function drawFicheActeur(films, yearMin, yearMax, actorName) {
+function drawFicheActeur(films, yearMin, yearMax, person, category) {
    d3.select("#fiche").html('<div id="chart"></div>   <div id="chart2">     <div id="competences">       <div id = "haut"></div>       <div id = "actor"></div>       <div id = "bas"></div>     </div>   </div>   <div id = "coupe"></div>   <div id = "fetiche1"></div>   <div id = "fetiche2"></div>');
 
-   var filmPerSubject = getSixSubjects(films,actorName);
+   var filmPerSubject = getSixSubjects(films,person);
    var dataset = filmPerSubject.slice(0,3);
 
    var dataset2 = filmPerSubject.slice(3,6);
 
-   var nbAwards = getNbOfAwards(films,actorName);
-   var type1 = "Réalisateur fétiche";
-   var favorite1 = favoriteDirector(films, actorName);
-   var type2 = "Actrice fétiche";
-   var favorite2 = "Pénélope Cruz";
+   var nbAwards = getNbOfAwards(films,person);
+   if(category == "actor"){
+     var type1 = "Réalisateur fétiche";
+     var favorite1 = favoriteDirector(films, person);
+     var type2 = "Actrice fétiche";
+     var favorite2 = favoriteActress(films, person);
+   }
+   else if (category == "actress") {
+     var type1 = "Réalisateur fétiche";
+     var favorite1 = favoriteDirector(films, person);
+     var type2 = "Acteurr fétiche";
+     var favorite2 = favoriteActor(films, person);
+   }
+   else{
+     var type1 = "Actrice fétiche";
+     var favorite1 = favoriteActress(films, person);
+     var type2 = "Acteur fétiche";
+     var favorite2 = favoriteActor(films, person);
+   }
+
    //var data = [{x: 1920, y: 20}, {x: 1950, y: 50}, {x: 1970, y: 87}, {x: 1980, y: 70}, {x: 1990, y: 10}];
-   var data = getPopularityPerYear(films, yearMin, yearMax, actorName);
+   var data = getPopularityPerYear(films, yearMin, yearMax, person);
 
    var nb = []
    for (i = 0; i < dataset.length; i++) {
@@ -62,7 +77,7 @@ function drawFicheActeur(films, yearMin, yearMax, actorName) {
    .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
    svg3.append("text")
-   .text(actorName)
+   .text(person)
    .attr("x", (w2-step)/2)
    .attr("y", (20+margin.top+margin.bottom)/2+10)
    .attr("font-family", "sans-serif")

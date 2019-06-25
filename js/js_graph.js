@@ -71,7 +71,7 @@ function drawGraph(dataset)
           d3.select(this).attr("stroke-width", 2);
           lastCircle = this;
           console.log("handle!");
-          drawFicheActeur(dataset, 1900, 2010, d.name);
+          drawFicheActeur(dataset, 1900, 2010, d.name, d.category);
         }
       }
 
