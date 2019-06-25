@@ -111,7 +111,7 @@ function favoriteActress(films, person){
   for(var i = 0; i<films.length; i++) {
     if ((films[i].actor ==  person)||(films[i].director ==  person)) {
       if(films[i].actress in actresses){
-        directors[films[i].actress] = actresses[films[i].actress]+1;
+        actresses[films[i].actress] = actresses[films[i].actress]+1;
       }
       else{
         actresses[films[i].actress] = 1;
