@@ -24,7 +24,11 @@ function drawGraph(dataset, yearMin, yearMax)
       .force("x", d3.forceX(width / 2))
       .force("y", d3.forceY(height / 2));
 
-  var radius = 20;
+  var radius = 10;
+
+  function sizeBlob(t) {
+      return 12 + t/25;
+  }
 
   //draw lines for the links
   var link = svg_graph.append("g")
@@ -42,8 +46,8 @@ function drawGraph(dataset, yearMin, yearMax)
           .data(nodes_data)
           .enter()
           .append("rect")
-          .attr("width", radius)
-          .attr("height", radius)
+          .attr("width", d =>sizeBlob(d.popularity))
+          .attr("height", d =>sizeBlob(d.popularity))
           .attr("rx", d => d.category != "director" ? 100 : 0)
           .attr("fill", nodeColour)
           .style("stroke", "green")
@@ -147,8 +151,8 @@ function drawGraph(dataset, yearMin, yearMax)
   function tickActions() {
       //update circle positions each tick of the simulation
       node
-          .attr("x", function(d) { return d.x-radius/2; })
-          .attr("y", function(d) { return d.y-radius/2; });
+          .attr("x", function(d) { return d.x- sizeBlob(d.popularity)/2; })
+          .attr("y", function(d) { return d.y- sizeBlob(d.popularity)/2; });
 
       //update link positions
       //simply tells one end of the line to follow one node around

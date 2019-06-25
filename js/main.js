@@ -202,8 +202,11 @@ function getLinks(films, director){
   }
   var links = [];
   for(key in actors) {
+    if (key.length != 0 && director.length !=0) {
     link = {"source": director, "target": key, "nbOfFilm": actors[key]};
     links.push(link);
+  }
+
   }
   return links;
 }
@@ -236,21 +239,35 @@ function computeAllNodes(films) {
   }
 
   for (let act of actors) {
-    node = {"name": act,
-            "category": "actor",
-            "popularity": getPopularity(films, act),
-            "favSubject": getFavoriteSubject(films, act)};
-    nodes.push(node);
+    if(!act || 0 === act.length)
+    {
+      console.log("actres unknown!");
+    }
+    else
+    {
+      node = {"name": act,
+              "category": "actor",
+              "popularity": getPopularity(films, act),
+              "favSubject": getFavoriteSubject(films, act)};
+      nodes.push(node);
+    }
+
   }
 
   for (let act of actresses) {
-    node = {"name": act,
-            "category": "actress",
-            "popularity": getPopularity(films, act),
-            "favSubject": getFavoriteSubject(films, act)};
-    nodes.push(node);
+    if(!act || 0 === act.length)
+    {
+      console.log("actor unknown!");
+    }
+    else
+    {
+      node = {"name": act,
+              "category": "actor",
+              "popularity": getPopularity(films, act),
+              "favSubject": getFavoriteSubject(films, act)};
+      nodes.push(node);
+    }
   }
-
   return nodes;
 }
 
