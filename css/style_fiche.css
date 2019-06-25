@@ -1,4 +1,4 @@
-div.tooltip {
+div.tooltip_fiche {
 position: absolute;
 text-align: center;
 width: 60px;
@@ -10,3 +10,7 @@ border: 0px;
 border-radius: 8px;
 pointer-events: none;
 }
+
+svg {
+    border: solid black 0px;
+  }

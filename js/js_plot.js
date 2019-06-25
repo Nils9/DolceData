@@ -2,7 +2,7 @@
 var svg_plot = d3.select("#canvas_svg"),
  w = +svg_plot.node().getBoundingClientRect().width,
  h = +svg_plot.node().getBoundingClientRect().height;
- console.log("plot " + w + " " + h);
+
 var dataset = [];
 
 var padding = 50;
@@ -22,7 +22,6 @@ d3.csv("data/film.csv")
       };
   })
   .get((error, rows) => {
-      console.log("Loaded " + rows.length + " rows");
       x = d3.scaleLinear()
         .domain(d3.extent(rows, (row) => row.year))
         .range([padding, w - padding * 2]);
@@ -31,6 +30,7 @@ d3.csv("data/film.csv")
         .range([h - padding * 2, padding]);
       dataset = rows;
       draw(dataset);
+      drawGraph(dataset, 1920, 1997);
   });
 
 var canvas = d3.select("#canvas");
@@ -99,11 +99,11 @@ var yAxis = d3.axisLeft()
               .scale(yScale).tickFormat(x => x + "%");
 
 // Draw the data
-function draw(dataset) {
+function draw(dataset_) {
     svg.append("g")
         .attr("class", "dataset")
         .selectAll("circle")
-        .data(dataset)
+        .data(dataset_)
         .enter()
         .append("circle")
         .attr("r", 3)
@@ -194,6 +194,8 @@ canvas.on("mouseup", function() {
     var b = Math.max(d3.mouse(this)[0], clickX);
     var c = Math.min(d3.mouse(this)[1], clickY);
     var d = Math.max(d3.mouse(this)[1], clickY);
+
+    drawGraph(popularityFilter(yearFilter(dataset, xScale.invert(a-45), xScale.invert(b-45)), -0.2174*d+110, -0.2174*c+110), xScale.invert(a-45), xScale.invert(b-45));
 
     if(a == b && c == d)
     {
