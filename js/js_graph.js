@@ -16,6 +16,7 @@ function drawGraph(dataset, yearMin, yearMax)
   var simulation = d3.forceSimulation()
                 .nodes(nodes_data);
 
+  window.scrollBy(100, 0); 
   //add forcess
   //we're going to add a charge to each node
   //also going to add a centering force
@@ -33,11 +34,11 @@ function drawGraph(dataset, yearMin, yearMax)
   //draw lines for the links
   var link = svg_graph.append("g")
         .attr("class", "links")
-      .selectAll("line")
-      .data(links_data)
-      .enter().append("line")
+        .selectAll("line")
+        .data(links_data)
+        .enter().append("line")
         .attr("stroke-width", linkThickness)
-        .style("stroke", "green");
+        .style("stroke", "lightgrey");
 
   //draw circles for the F
   var node = svg_graph.append("g")
@@ -50,7 +51,7 @@ function drawGraph(dataset, yearMin, yearMax)
           .attr("height", d =>sizeBlob(d.popularity))
           .attr("rx", d => d.category != "director" ? 100 : 0)
           .attr("fill", nodeColour)
-          .style("stroke", "green")
+          .style("stroke", "black")
           .attr("stroke-width", 0)
           .on("click", handleClick)
           .on("mouseover", handleMouseOver)

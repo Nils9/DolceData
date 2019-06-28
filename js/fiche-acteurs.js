@@ -12,6 +12,8 @@ function drawFicheActeur(films, yearMin, yearMax, person, category) {
      var favorite1 = favoriteDirector(films, person);
      var type2 = "Actrice fétiche";
      var favorite2 = favoriteActress(films, person);
+    
+     
    }
    else if (category == "actress") {
      var type1 = "Réalisateur fétiche";
@@ -47,8 +49,8 @@ function drawFicheActeur(films, yearMin, yearMax, person, category) {
    var h2 = 100;
    var margin = { top: 10, right: 0, bottom: 10, left: 0};
    var step = (w2-40*dataset.length)/dataset.length;
-   var colors = {"Action":"red", "Adventure":"darkgoldenrod", "Comedy":"blue", "Crime":"crimson", "Drama":"purple", "Fantasy":"chartreuse", "Horror":"black", "Music":"chocolate", "Mystery":"yellow", "Romance":"palevioletred", "Science Fiction":"green", "Short":"coral", "War":"olive",  "Western":"khaki", "Westerns":"khaki"}
-
+   var colors = {"Comedy":"pink","Horror":"black","Action":"red","Drama":"lightblue","Science Fiction":"green","Mystery":"yellow",
+"Music":"blue","War":"orange","Westerns" : "grey", "Western":"grey","Short":"purple","Adventure": "cyan","Fantasy":"rainbow","Romance":"magenta"}
    var svg1 = d3.select("#haut")
             .append("svg")
             .attr("width", w2)

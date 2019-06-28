@@ -7,3 +7,9 @@
   stroke: #fff;
   stroke-width: 1.5px;
 }
+
+#canva {
+  width:960px;
+  height: 600px;
+  overflow: auto;
+}

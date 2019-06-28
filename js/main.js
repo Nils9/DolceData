@@ -88,12 +88,12 @@ function favoriteDirector(films, person){
   var directors = {};
   for(var i = 0; i<films.length; i++) {
     if ((films[i].actor ==  person)||(films[i].actress ==  person)) {
-      if(films[i].director in directors){
-        directors[films[i].director] = directors[films[i].director]+1;
-      }
-      else{
-        directors[films[i].director] = 1;
-      }
+        if(films[i].director in directors){
+          directors[films[i].director] = directors[films[i].director]+1;
+        }
+        else{
+          directors[films[i].director] = 1;
+        }
     }
   }
   sortedDirectors = sort_object(directors);
@@ -109,14 +109,17 @@ function favoriteDirector(films, person){
 function favoriteActress(films, person){
   var actresses = {};
   for(var i = 0; i<films.length; i++) {
-    if ((films[i].actor ==  person)||(films[i].director ==  person)) {
-      if(films[i].actress in actresses){
-        actresses[films[i].actress] = actresses[films[i].actress]+1;
-      }
-      else{
-        actresses[films[i].actress] = 1;
+    if (films[i].actress.length != 0) {
+      if ((films[i].actor ==  person)||(films[i].director ==  person)) {
+        if(films[i].actress in actresses){
+          actresses[films[i].actress] = actresses[films[i].actress]+1;
+        }
+        else{
+          actresses[films[i].actress] = 1;
+        }
       }
     }
+
   }
   sortedActresses = sort_object(actresses);
   if (sortedActresses.length > 0) {
@@ -131,12 +134,15 @@ function favoriteActress(films, person){
 function favoriteActor(films, person){
   var actors = {};
   for(var i = 0; i<films.length; i++) {
-    if ((films[i].actress ==  person)||(films[i].director ==  person)) {
-      if(films[i].actor in actors){
-        actors[films[i].actor] = actors[films[i].actor]+1;
-      }
-      else{
-        actors[films[i].actor] = 1;
+    
+    if (films[i].actor.length != 0) {
+      if ((films[i].actress ==  person)||(films[i].director ==  person)) {
+        if(films[i].actor in actors){
+          actors[films[i].actor] = actors[films[i].actor]+1;
+        }
+        else{
+          actors[films[i].actor] = 1;
+        }
       }
     }
   }
